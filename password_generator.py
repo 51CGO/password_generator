@@ -43,11 +43,19 @@ if __name__ == "__main__":
     parser.add_argument(
         "--no-punctuation", "-p", dest="allow_punctuation",
         action="store_false", help="Do no include punctuation signs")
+    parser.add_argument(
+        "--output", "-o", help="Output file")
     
     args = parser.parse_args()
    
     password = generate_password(
         args.count, args.allow_lower, args.allow_upper, args.allow_digit,
         args.allow_punctuation)
-        
-    print(password)
+    
+    if args.output:
+        f = open(args.output, "w")
+        f.write(password)
+        f.close()
+    
+    else:
+        print(password)
