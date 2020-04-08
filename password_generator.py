@@ -4,11 +4,12 @@ import argparse
 import random
 import string
 
+
 def generate_password(
-    count,
-    allow_lower=True, allow_upper=True,
-    allow_digit=True, allow_punctuation=True):
-    
+        count,
+        allow_lower=True, allow_upper=True,
+        allow_digit=True, allow_punctuation=True):
+
     characters = ""
 
     if allow_lower:
@@ -19,7 +20,7 @@ def generate_password(
         characters += string.digits
     if allow_punctuation:
         characters += string.punctuation
-        
+
     password = ""
     for i in range(args.count):
         password += random.choice(characters)
@@ -45,17 +46,17 @@ if __name__ == "__main__":
         action="store_false", help="Do no include punctuation signs")
     parser.add_argument(
         "--output", "-o", help="Output file")
-    
+
     args = parser.parse_args()
-   
+
     password = generate_password(
         args.count, args.allow_lower, args.allow_upper, args.allow_digit,
         args.allow_punctuation)
-    
+
     if args.output:
         f = open(args.output, "w")
         f.write(password)
         f.close()
-    
+
     else:
         print(password)
